@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="4.0">
+	
+	
+	<!-- key:
+	
+	In order to have the servlet be able to serving client’s requests, 
+	you have to declare and configure mapping for the servlet in web deployment descriptor file
+	Request for the client first come to web.xml
+	this file is also called deployment descriptor
+	 -->
+	
+	
+	<display-name>Spring-Web-project</display-name>
+	<absolute-ordering />
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+	<context-param>
+		<param-name>spring.liveBeansView.mbeanDomain</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+	<!-- Spring MVC Configs -->
+
+	<!-- Step 1: Configure Spring MVC Dispatcher Servlet -->
+	<servlet>
+	
+	
+	
+<!-- 	Dispatcher servlet is also called front controller
+		this could be any name
+		our dispatcher servlet will create a web container automatically in the web appliction 
+		while in stand alone application we have to create it 
+	//ClassPathXmlApplicationContext beanref= new ClassPathXmlApplicationContext("applicationContext.xml");
+	//	AnnotationConfigApplicationContext beanref= new AnnotationConfigApplicationContext(BaseConfig.class);
+		
+		
+	 -->
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc-demo-servlet.xml</param-value>
+		</init-param>
+		
+		
+<!-- 		whenever the server is started, above servlet is initilized
+ -->		<load-on-startup>1</load-on-startup>
+		
+		
+		 <!-- <servlet-name>QuickServlet</servlet-name>
+        <servlet-class>com.mvc.springHibernateProg.QuickServlet</servlet-class> -->
+		
+		
+	</servlet>
+	<servlet-mapping>
+	
+	
+<!-- 	this could be any name
+ -->	
+	
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+		
+		<!-- <servlet-name>QuickServlet</servlet-name>
+        <url-pattern>/QuickServlet</url-pattern> -->
+	</servlet-mapping>
+	
+	  <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+    
+  
+   <welcome-file>/WEB-INF/view/welcome.jsp</welcome-file>
+  
+ </welcome-file-list>
+</web-app>
